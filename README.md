@@ -9,6 +9,7 @@ This script will build the package and launch everything:
 Then in second terminal the camera_view node can be launched to chase the cat:
 ```bash
 ros2 run cat_chaser camera_view
+# you can either manually position the existing cat model in the world or use your own 3d cat model
 ```
 
 The robot design simple Four Wheel Drive robot with Ackerman Steering plugin.
