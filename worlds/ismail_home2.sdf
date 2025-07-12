@@ -1,0 +1,1518 @@
+<sdf version='1.12'>
+  <world name='default'>
+    <gravity>0 0 -9.800</gravity>
+    <magnetic_field>0.000 0.000 -0.000</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    
+    <plugin
+        filename="gz-sim-physics-system"
+        name="gz::sim::systems::Physics">
+    </plugin>
+
+    <plugin
+        filename="gz-sim-user-commands-system"
+        name="gz::sim::systems::UserCommands">
+    </plugin>
+
+    <plugin
+        filename="gz-sim-scene-broadcaster-system"
+        name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+
+    <scene>
+      <ambient>0.400 0.400 0.400 1</ambient>
+      <background>0.700 0.700 0.700 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+
+    <model name="cat">
+      <pose>2 2 0 0 0 0</pose>
+      <static>false</static>
+      
+      <link name="body">
+        <pose>0 0 0.2 0 0 0</pose>
+        
+        <!-- Main cat body visual -->
+        <visual name="visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/ismail/ros2_ws/src/cat_chaser/meshes/cat.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+            </mesh>
+          </geometry>
+          <pose>0 0 0 1.5708 0 0</pose>
+          <material>
+            <ambient>0.2 0.2 0.2 1</ambient>    <!-- Lighter gray -->
+            <diffuse>0.3 0.3 0.3 1</diffuse>    <!-- Much lighter gray -->
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        
+        <!-- Left Eye -->
+        <visual name="left_eye">
+          <geometry>
+            <sphere>
+              <radius>0.015</radius>
+            </sphere>
+          </geometry>
+          <!-- Cat's face is on positive X, eyes should be high up on Z -->
+          <pose>0.505 -0.0345 0.564 1.5708 0 0</pose>
+          <material>
+            <ambient>1.0 0.8 0.0 1</ambient>
+            <diffuse>1.0 0.9 0.2 1</diffuse>
+            <specular>1.0 1.0 1.0 1</specular>
+            <emissive>0.3 0.2 0.0 1</emissive>
+          </material>
+        </visual>
+        
+        <!-- Right Eye -->
+        <visual name="right_eye">
+          <geometry>
+            <sphere>
+              <radius>0.015</radius>
+            </sphere>
+          </geometry>
+          <pose>0.505 0.0345 0.564 1.5708 0 0</pose>
+          <material>
+            <ambient>1.0 0.8 0.0 1</ambient>
+            <diffuse>1.0 0.9 0.2 1</diffuse>
+            <specular>1.0 1.0 1.0 1</specular>
+            <emissive>0.3 0.2 0.0 1</emissive>
+          </material>
+        </visual>
+        
+        <!-- Left Eye Pupil -->
+        <visual name="left_pupil">
+          <geometry>
+            <sphere>
+              <radius>0.008</radius>
+            </sphere>
+          </geometry>
+          <pose>0.5133 -0.0345 0.564 1.5708 0 0</pose>
+          <material>
+            <ambient>0.0 0.0 0.0 1</ambient>
+            <diffuse>0.0 0.0 0.0 1</diffuse>
+            <specular>0.0 0.0 0.0 1</specular>
+          </material>
+        </visual>
+        
+        <!-- Right Eye Pupil -->
+        <visual name="right_pupil">
+          <geometry>
+            <sphere>
+              <radius>0.008</radius>
+            </sphere>
+          </geometry>
+          <pose>0.5133 0.0345 0.564 1.5708 0 0</pose>
+          <material>
+            <ambient>0.0 0.0 0.0 1</ambient>
+            <diffuse>0.0 0.0 0.0 1</diffuse>
+            <specular>0.0 0.0 0.0 1</specular>
+          </material>
+        </visual>
+        
+        <!-- Left Whiskers -->
+        <visual name="left_whisker_1">
+          <geometry>
+            <cylinder>
+              <radius>0.001</radius>
+              <length>0.08</length>
+            </cylinder>
+          </geometry>
+          <pose>0.548 -0.024 0.5123 1.5708 0 0</pose>
+          <material>
+            <ambient>1.0 1.0 1.0 1</ambient>
+            <diffuse>1.0 1.0 1.0 1</diffuse>
+            <specular>1.0 1.0 1.0 1</specular>
+            <emissive>0.2 0.2 0.2 1</emissive>
+          </material>
+        </visual>
+        
+        <visual name="left_whisker_2">
+          <geometry>
+            <cylinder>
+              <radius>0.001</radius>
+              <length>0.08</length>
+            </cylinder>
+          </geometry>
+          <pose>0.548 -0.024 0.505 1.5708 0 0</pose>
+          <material>
+            <ambient>1.0 1.0 1.0 1</ambient>
+            <diffuse>1.0 1.0 1.0 1</diffuse>
+            <specular>1.0 1.0 1.0 1</specular>
+            <emissive>0.2 0.2 0.2 1</emissive>
+          </material>
+        </visual>
+        
+        
+        <!-- Right Whiskers -->
+        <visual name="right_whisker_1">
+          <geometry>
+            <cylinder>
+              <radius>0.001</radius>
+              <length>0.08</length>
+            </cylinder>
+          </geometry>
+          <pose>0.548 0.024 0.5123 1.5708 0 0</pose>
+          <material>
+            <ambient>1.0 1.0 1.0 1</ambient>
+            <diffuse>1.0 1.0 1.0 1</diffuse>
+            <specular>1.0 1.0 1.0 1</specular>
+            <emissive>0.2 0.2 0.2 1</emissive>
+          </material>
+        </visual>
+        
+        <visual name="right_whisker_2">
+          <geometry>
+            <cylinder>
+              <radius>0.001</radius>
+              <length>0.08</length>
+            </cylinder>
+          </geometry>
+          <pose>0.548 0.024 0.505 1.5708 0 0</pose>
+          <material>
+            <ambient>1.0 1.0 1.0 1</ambient>
+            <diffuse>1.0 1.0 1.0 1</diffuse>
+            <specular>1.0 1.0 1.0 1</specular>
+            <emissive>0.2 0.2 0.2 1</emissive>
+          </material>
+        </visual>
+        
+        
+        <!-- Pink Nose -->
+        <visual name="nose">
+          <geometry>
+            <sphere>
+              <radius>0.008</radius>
+            </sphere>
+          </geometry>
+          <pose>0.548 0 0.515 1.5708 0 0</pose>
+          <material>
+            <ambient>1.0 0.2 0.4 1</ambient>
+            <diffuse>1.0 0.4 0.6 1</diffuse>
+            <specular>0.5 0.5 0.5 1</specular>
+            <emissive>0.2 0.05 0.1 1</emissive>
+          </material>
+        </visual>
+        
+        <!-- Collision (same as before) -->
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.12 0.06 0.09</size>
+            </box>
+          </geometry>
+          <pose>0 0 0 1.5708 0 0</pose>
+        </collision>
+        
+        <!-- Inertial properties (same as before) -->
+        <inertial>
+          <mass>1.0</mass>
+          <pose>0 0 0 0 0 0</pose>
+          <inertia>
+            <ixx>0.01</ixx>
+            <ixy>0.0</ixy>
+            <ixz>0.0</ixz>
+            <iyy>0.02</iyy>
+            <iyz>0.0</iyz>
+            <izz>0.02</izz>
+          </inertia>
+        </inertial>
+      </link>
+    </model>
+    
+
+    <model name='ismail_home2'>
+      <pose>-1.769 2.788 0 0 0 0.000</pose>
+      <link name='Wall_1'>
+        <pose>5.459 -3.741 0 0 0 1.571</pose>
+        <visual name='Wall_1_Visual_0'>
+          <pose>-1.384 0 1.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.233 0.150 2.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <collision name='Wall_1_Collision_0'>
+          <geometry>
+            <box>
+              <size>2.233 0.150 2.500</size>
+            </box>
+          </geometry>
+          <pose>-1.384 0 1.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_1_Visual_1'>
+          <pose>1.116 0 0.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.767 0.150 0.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <collision name='Wall_1_Collision_1'>
+          <geometry>
+            <box>
+              <size>2.767 0.150 0.500</size>
+            </box>
+          </geometry>
+          <pose>1.116 0 0.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_1_Visual_2'>
+          <pose>1.516 0 1.500 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.967 0.150 2.000</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <collision name='Wall_1_Collision_2'>
+          <geometry>
+            <box>
+              <size>1.967 0.150 2.000</size>
+            </box>
+          </geometry>
+          <pose>1.516 0 1.500 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_1_Visual_3'>
+          <pose>0.133 0 1.900 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.800 0.150 1.200</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <collision name='Wall_1_Collision_3'>
+          <geometry>
+            <box>
+              <size>0.800 0.150 1.200</size>
+            </box>
+          </geometry>
+          <pose>0.133 0 1.900 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <link name='Wall_10'>
+        <collision name='Wall_10_Collision'>
+          <geometry>
+            <box>
+              <size>5.000 0.150 2.500</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_10_Visual'>
+          <pose>0 0 1.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>5.000 0.150 2.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-4.891 -3.741 0 0 0 1.571</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <link name='Wall_11'>
+        <collision name='Wall_11_Collision'>
+          <geometry>
+            <box>
+              <size>3.250 0.150 2.500</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_11_Visual'>
+          <pose>0 0 1.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.250 0.150 2.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-3.341 -1.316 0 0 0 0.000</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <link name='Wall_12'>
+        <collision name='Wall_12_Collision'>
+          <geometry>
+            <box>
+              <size>3.000 0.150 2.500</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_12_Visual'>
+          <pose>0 0 1.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.000 0.150 2.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-1.791 0.109 0 0 0 1.571</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <link name='Wall_13'>
+        <collision name='Wall_13_Collision'>
+          <geometry>
+            <box>
+              <size>5.750 0.150 2.500</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_13_Visual'>
+          <pose>0 0 1.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>5.750 0.150 2.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-4.591 1.534 0 0 0 3.142</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <link name='Wall_14'>
+        <collision name='Wall_14_Collision'>
+          <geometry>
+            <box>
+              <size>4.750 0.150 2.500</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_14_Visual'>
+          <pose>0 0 1.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>4.750 0.150 2.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-7.391 3.834 0 0 0 1.571</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <link name='Wall_15'>
+        <pose>-3.341 6.134 0 0 0 0.000</pose>
+        <visual name='Wall_15_Visual_0'>
+          <pose>-1.667 0 1.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>4.917 0.150 2.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <collision name='Wall_15_Collision_0'>
+          <geometry>
+            <box>
+              <size>4.917 0.150 2.500</size>
+            </box>
+          </geometry>
+          <pose>-1.667 0 1.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_15_Visual_1'>
+          <pose>2.458 0 0.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.333 0.150 0.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <collision name='Wall_15_Collision_1'>
+          <geometry>
+            <box>
+              <size>3.333 0.150 0.500</size>
+            </box>
+          </geometry>
+          <pose>2.458 0 0.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_15_Visual_2'>
+          <pose>2.858 0 1.500 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.533 0.150 2.000</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <collision name='Wall_15_Collision_2'>
+          <geometry>
+            <box>
+              <size>2.533 0.150 2.000</size>
+            </box>
+          </geometry>
+          <pose>2.858 0 1.500 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_15_Visual_3'>
+          <pose>1.192 0 1.900 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.800 0.150 1.200</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <collision name='Wall_15_Collision_3'>
+          <geometry>
+            <box>
+              <size>0.800 0.150 1.200</size>
+            </box>
+          </geometry>
+          <pose>1.192 0 1.900 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <link name='Wall_16'>
+        <collision name='Wall_16_Collision'>
+          <geometry>
+            <box>
+              <size>4.750 0.150 2.500</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_16_Visual'>
+          <pose>0 0 1.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>4.750 0.150 2.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>0.709 3.834 0 0 0 -1.571</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <link name='Wall_22'>
+        <collision name='Wall_22_Collision'>
+          <geometry>
+            <box>
+              <size>1.250 0.150 2.500</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_22_Visual'>
+          <pose>0 0 1.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.250 0.150 2.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>0.609 -0.766 0 0 0 1.571</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <link name='Wall_24'>
+        <collision name='Wall_24_Collision'>
+          <geometry>
+            <box>
+              <size>0.500 0.150 2.500</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_24_Visual'>
+          <pose>0 0 1.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.500 0.150 2.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-1.616 1.534 0 0 0 0.000</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <link name='Wall_27'>
+        <collision name='Wall_27_Collision'>
+          <geometry>
+            <box>
+              <size>0.250 0.150 2.500</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_27_Visual'>
+          <pose>0 0 1.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.250 0.150 2.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>0.659 1.534 0 0 0 3.142</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <link name='Wall_3'>
+        <collision name='Wall_3_Collision'>
+          <geometry>
+            <box>
+              <size>5.000 0.150 2.500</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_3_Visual'>
+          <pose>0 0 1.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>5.000 0.150 2.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>3.034 -1.316 0 0 0 3.142</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <link name='Wall_6'>
+        <pose>0.284 -6.166 0 0 0 3.142</pose>
+        <visual name='Wall_6_Visual_0'>
+          <pose>-4.975 0 1.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.550 0.150 2.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <collision name='Wall_6_Collision_0'>
+          <geometry>
+            <box>
+              <size>0.550 0.150 2.500</size>
+            </box>
+          </geometry>
+          <pose>-4.975 0 1.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_6_Visual_1'>
+          <pose>0.725 0 1.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>9.050 0.150 2.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <collision name='Wall_6_Collision_1'>
+          <geometry>
+            <box>
+              <size>9.050 0.150 2.500</size>
+            </box>
+          </geometry>
+          <pose>0.725 0 1.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_6_Visual_2'>
+          <pose>-4.250 0 2.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.900 0.150 0.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <collision name='Wall_6_Collision_2'>
+          <geometry>
+            <box>
+              <size>0.900 0.150 0.500</size>
+            </box>
+          </geometry>
+          <pose>-4.250 0 2.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <link name='Wall_67'>
+        <collision name='Wall_67_Collision'>
+          <geometry>
+            <box>
+              <size>6.250 0.150 2.500</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_67_Visual'>
+          <pose>0 0 1.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>6.250 0.150 2.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>3.759 6.134 0 0 0 0.000</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <link name='Wall_68'>
+        <pose>6.809 2.459 0 0 0 -1.571</pose>
+        <visual name='Wall_68_Visual_0'>
+          <pose>-1.784 0 1.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.932 0.150 2.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <collision name='Wall_68_Collision_0'>
+          <geometry>
+            <box>
+              <size>3.932 0.150 2.500</size>
+            </box>
+          </geometry>
+          <pose>-1.784 0 1.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_68_Visual_1'>
+          <pose>1.966 0 0.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.568 0.150 0.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <collision name='Wall_68_Collision_1'>
+          <geometry>
+            <box>
+              <size>3.568 0.150 0.500</size>
+            </box>
+          </geometry>
+          <pose>1.966 0 0.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_68_Visual_2'>
+          <pose>2.366 0 1.500 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.768 0.150 2.000</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <collision name='Wall_68_Collision_2'>
+          <geometry>
+            <box>
+              <size>2.768 0.150 2.000</size>
+            </box>
+          </geometry>
+          <pose>2.366 0 1.500 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_68_Visual_3'>
+          <pose>0.582 0 1.900 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.800 0.150 1.200</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <collision name='Wall_68_Collision_3'>
+          <geometry>
+            <box>
+              <size>0.800 0.150 1.200</size>
+            </box>
+          </geometry>
+          <pose>0.582 0 1.900 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <link name='Wall_69'>
+        <collision name='Wall_69_Collision'>
+          <geometry>
+            <box>
+              <size>1.504 0.150 2.500</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_69_Visual'>
+          <pose>0 0 1.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.504 0.150 2.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>6.134 -1.266 0 0 0 -3.068</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <link name='Wall_71'>
+        <collision name='Wall_71_Collision'>
+          <geometry>
+            <box>
+              <size>3.000 0.150 2.500</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_71_Visual'>
+          <pose>0 0 1.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.000 0.150 2.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-0.701 4.741 0 0 0 -1.571</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <link name='Wall_72'>
+        <collision name='Wall_72_Collision'>
+          <geometry>
+            <box>
+              <size>1.500 0.150 2.500</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_72_Visual'>
+          <pose>0 0 1.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.500 0.150 2.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-0.026 3.316 0 0 0 0.000</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <link name='Wall_74'>
+        <collision name='Wall_74_Collision'>
+          <geometry>
+            <box>
+              <size>6.250 0.150 2.500</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.250 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Wall_74_Visual'>
+          <pose>0 0 1.250 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>6.250 0.150 2.500</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.647 0.498 0.388 1</ambient>
+            <diffuse>0.647 0.498 0.388 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>3.659 -0.216 0 0 0 0.000</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <link name='Floor'>
+        <pose>0 0 0 0 0 0</pose>
+        <collision name='Floor_Collision'>
+          <geometry>
+            <box>
+              <size>16.000 13.000 0.100</size>
+            </box>
+          </geometry>
+          <pose>0 0 0.050 0 0 0</pose>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='Floor_Visual'>
+          <pose>0 0 0.050 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>16.000 13.000 0.100</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.950 0.950 0.920 1</ambient>
+            <diffuse>0.950 0.950 0.920 1</diffuse>
+            <specular>0.100 0.100 0.100 1</specular>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+      <self_collide>false</self_collide>
+    </model>
+  </world>
+</sdf>

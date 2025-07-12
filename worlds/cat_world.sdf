@@ -1,0 +1,231 @@
+<sdf version='1.12'>
+  <world name='default'>
+    <gravity>0 0 -9.800</gravity>
+    <magnetic_field>0.000 0.000 -0.000</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+
+    <plugin
+        filename="gz-sim-physics-system"
+        name="gz::sim::systems::Physics">
+    </plugin>
+
+    <plugin
+        filename="gz-sim-user-commands-system"
+        name="gz::sim::systems::UserCommands">
+    </plugin>
+
+    <plugin
+        filename="gz-sim-scene-broadcaster-system"
+        name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+
+    <scene>
+      <ambient>0.400 0.400 0.400 1</ambient>
+      <background>0.700 0.700 0.700 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+
+    <model name="cat">
+      <pose>2 2 0 0 0 0</pose>
+      <static>false</static>
+      
+      <link name="body">
+        <pose>0 0 0.2 0 0 0</pose>
+        
+        <!-- Main cat body visual -->
+        <visual name="visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/ismail/ros2_ws/src/cat_chaser/meshes/cat.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+            </mesh>
+          </geometry>
+          <pose>0 0 0 1.5708 0 0</pose>
+          <material>
+            <ambient>0.2 0.2 0.2 1</ambient>    <!-- Lighter gray -->
+            <diffuse>0.3 0.3 0.3 1</diffuse>    <!-- Much lighter gray -->
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        
+        <!-- Left Eye -->
+        <visual name="left_eye">
+          <geometry>
+            <sphere>
+              <radius>0.015</radius>
+            </sphere>
+          </geometry>
+          <!-- Cat's face is on positive X, eyes should be high up on Z -->
+          <pose>0.505 -0.0345 0.564 1.5708 0 0</pose>
+          <material>
+            <ambient>1.0 0.8 0.0 1</ambient>
+            <diffuse>1.0 0.9 0.2 1</diffuse>
+            <specular>1.0 1.0 1.0 1</specular>
+            <emissive>0.3 0.2 0.0 1</emissive>
+          </material>
+        </visual>
+        
+        <!-- Right Eye -->
+        <visual name="right_eye">
+          <geometry>
+            <sphere>
+              <radius>0.015</radius>
+            </sphere>
+          </geometry>
+          <pose>0.505 0.0345 0.564 1.5708 0 0</pose>
+          <material>
+            <ambient>1.0 0.8 0.0 1</ambient>
+            <diffuse>1.0 0.9 0.2 1</diffuse>
+            <specular>1.0 1.0 1.0 1</specular>
+            <emissive>0.3 0.2 0.0 1</emissive>
+          </material>
+        </visual>
+        
+        <!-- Left Eye Pupil -->
+        <visual name="left_pupil">
+          <geometry>
+            <sphere>
+              <radius>0.008</radius>
+            </sphere>
+          </geometry>
+          <pose>0.5133 -0.0345 0.564 1.5708 0 0</pose>
+          <material>
+            <ambient>0.0 0.0 0.0 1</ambient>
+            <diffuse>0.0 0.0 0.0 1</diffuse>
+            <specular>0.0 0.0 0.0 1</specular>
+          </material>
+        </visual>
+        
+        <!-- Right Eye Pupil -->
+        <visual name="right_pupil">
+          <geometry>
+            <sphere>
+              <radius>0.008</radius>
+            </sphere>
+          </geometry>
+          <pose>0.5133 0.0345 0.564 1.5708 0 0</pose>
+          <material>
+            <ambient>0.0 0.0 0.0 1</ambient>
+            <diffuse>0.0 0.0 0.0 1</diffuse>
+            <specular>0.0 0.0 0.0 1</specular>
+          </material>
+        </visual>
+        
+        <!-- Left Whiskers -->
+        <visual name="left_whisker_1">
+          <geometry>
+            <cylinder>
+              <radius>0.001</radius>
+              <length>0.08</length>
+            </cylinder>
+          </geometry>
+          <pose>0.548 -0.024 0.5123 1.5708 0 0</pose>
+          <material>
+            <ambient>1.0 1.0 1.0 1</ambient>
+            <diffuse>1.0 1.0 1.0 1</diffuse>
+            <specular>1.0 1.0 1.0 1</specular>
+            <emissive>0.2 0.2 0.2 1</emissive>
+          </material>
+        </visual>
+        
+        <visual name="left_whisker_2">
+          <geometry>
+            <cylinder>
+              <radius>0.001</radius>
+              <length>0.08</length>
+            </cylinder>
+          </geometry>
+          <pose>0.548 -0.024 0.505 1.5708 0 0</pose>
+          <material>
+            <ambient>1.0 1.0 1.0 1</ambient>
+            <diffuse>1.0 1.0 1.0 1</diffuse>
+            <specular>1.0 1.0 1.0 1</specular>
+            <emissive>0.2 0.2 0.2 1</emissive>
+          </material>
+        </visual>
+        
+        
+        <!-- Right Whiskers -->
+        <visual name="right_whisker_1">
+          <geometry>
+            <cylinder>
+              <radius>0.001</radius>
+              <length>0.08</length>
+            </cylinder>
+          </geometry>
+          <pose>0.548 0.024 0.5123 1.5708 0 0</pose>
+          <material>
+            <ambient>1.0 1.0 1.0 1</ambient>
+            <diffuse>1.0 1.0 1.0 1</diffuse>
+            <specular>1.0 1.0 1.0 1</specular>
+            <emissive>0.2 0.2 0.2 1</emissive>
+          </material>
+        </visual>
+        
+        <visual name="right_whisker_2">
+          <geometry>
+            <cylinder>
+              <radius>0.001</radius>
+              <length>0.08</length>
+            </cylinder>
+          </geometry>
+          <pose>0.548 0.024 0.505 1.5708 0 0</pose>
+          <material>
+            <ambient>1.0 1.0 1.0 1</ambient>
+            <diffuse>1.0 1.0 1.0 1</diffuse>
+            <specular>1.0 1.0 1.0 1</specular>
+            <emissive>0.2 0.2 0.2 1</emissive>
+          </material>
+        </visual>
+        
+        
+        <!-- Pink Nose -->
+        <visual name="nose">
+          <geometry>
+            <sphere>
+              <radius>0.008</radius>
+            </sphere>
+          </geometry>
+          <pose>0.548 0 0.515 1.5708 0 0</pose>
+          <material>
+            <ambient>1.0 0.2 0.4 1</ambient>
+            <diffuse>1.0 0.4 0.6 1</diffuse>
+            <specular>0.5 0.5 0.5 1</specular>
+            <emissive>0.2 0.05 0.1 1</emissive>
+          </material>
+        </visual>
+        
+        <!-- Collision (same as before) -->
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.12 0.06 0.09</size>
+            </box>
+          </geometry>
+          <pose>0 0 0 1.5708 0 0</pose>
+        </collision>
+        
+        <!-- Inertial properties (same as before) -->
+        <inertial>
+          <mass>1.0</mass>
+          <pose>0 0 0 0 0 0</pose>
+          <inertia>
+            <ixx>0.01</ixx>
+            <ixy>0.0</ixy>
+            <ixz>0.0</ixz>
+            <iyy>0.02</iyy>
+            <iyz>0.0</iyz>
+            <izz>0.02</izz>
+          </inertia>
+        </inertial>
+      </link>
+    </model>
+    
+  </world>
+</sdf>
